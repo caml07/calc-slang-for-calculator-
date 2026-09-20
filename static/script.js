@@ -20,5 +20,9 @@ buttons.forEach((button) => {
         if (value === "AC") {
             screen.textContent = "0";
         }
+
+        if (value === ".") {
+            screen.textContent += value;
+        }
     });
 });
