@@ -7,7 +7,7 @@ def calculate(expression):
 
     try:
         result = solve_parentheses(tokens)
-    except ZeroDivisionError:
+    except (ZeroDivisionError, ValueError):
         return "Math Error"
 
     if result.is_integer():
@@ -25,7 +25,12 @@ def solve_parentheses(tokens):
 
         inside = values[open_position + 1:close_position]
         result = solve_basic_expression(inside)
-        values[open_position:close_position + 1] = [result]
+
+        if open_position > 0 and values[open_position - 1] == "sqrt":
+            result = math.sqrt(result)
+            values[open_position - 1:close_position + 1] = [result]
+        else:
+            values[open_position:close_position + 1] = [result]
 
     return solve_basic_expression(values)
 
@@ -46,9 +51,17 @@ def tokenize_expression(expression):
             position += 2
             continue
 
+        if expression[position:position + 4] == "sqrt":
+            if number:
+                tokens.append(float(number))
+                number = ""
+            tokens.append("sqrt")
+            position += 4
+            continue
+
         if char.isdigit() or char == ".":
             number += char
-        elif char == "-" and (position == 0 or expression[position - 1] in "+-*/"):
+        elif char == "-" and (position == 0 or expression[position - 1] in "+-*/("):
             number += char
         else:
             if number:

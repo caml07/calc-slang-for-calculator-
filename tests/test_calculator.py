@@ -80,6 +80,15 @@ class CalculatorTest(unittest.TestCase):
     def test_pi_con_parentesis(self):
         self.assertEqual(calculate("pi * (2 + 1)"), 3 * math.pi)
 
+    def test_raiz_cuadrada(self):
+        self.assertEqual(calculate("sqrt(9)"), 3)
+
+    def test_raiz_cuadrada_dentro_de_expresion(self):
+        self.assertEqual(calculate("2 + sqrt(16)"), 6)
+
+    def test_raiz_cuadrada_negativa(self):
+        self.assertEqual(calculate("sqrt(-4)"), "Math Error")
+
 
 if __name__ == "__main__":
     unittest.main()
