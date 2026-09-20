@@ -101,6 +101,18 @@ class CalculatorTest(unittest.TestCase):
     def test_trigonometria_dentro_de_expresion(self):
         self.assertAlmostEqual(calculate("2 * sin(30)"), 1)
 
+    def test_logaritmo_base_diez(self):
+        self.assertEqual(calculate("log(100)"), 2)
+
+    def test_logaritmo_natural(self):
+        self.assertEqual(calculate("ln(1)"), 0)
+
+    def test_logaritmo_de_cero(self):
+        self.assertEqual(calculate("log(0)"), "Math Error")
+
+    def test_logaritmo_natural_negativo(self):
+        self.assertEqual(calculate("ln(-2)"), "Math Error")
+
 
 if __name__ == "__main__":
     unittest.main()
