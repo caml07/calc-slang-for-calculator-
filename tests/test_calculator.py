@@ -137,6 +137,21 @@ class CalculatorTest(unittest.TestCase):
     def test_operador_invalido(self):
         self.assertEqual(calculate("2 & 3"), "Syntax Error")
 
+    def test_decimal_con_dos_puntos(self):
+        self.assertEqual(calculate("1..2 + 3"), "Syntax Error")
+
+    def test_punto_solo(self):
+        self.assertEqual(calculate("."), "Syntax Error")
+
+    def test_porcentaje_repetido(self):
+        self.assertEqual(calculate("50%%"), "Syntax Error")
+
+    def test_funciones_anidadas(self):
+        self.assertEqual(calculate("sqrt(sqrt(16))"), 2)
+
+    def test_multiplicacion_implicita_no_permitida(self):
+        self.assertEqual(calculate("2(3 + 4)"), "Syntax Error")
+
 
 if __name__ == "__main__":
     unittest.main()

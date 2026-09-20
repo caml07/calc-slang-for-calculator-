@@ -5,14 +5,14 @@ def calculate(expression):
     expression = expression.replace(" ", "")
 
     try:
-        if not expression or not has_valid_parentheses(expression):
+        if not expression or not has_valid_parentheses(expression) or "%%" in expression:
             return "Syntax Error"
 
         tokens = tokenize_expression(expression)
         result = solve_parentheses(tokens)
-    except (ZeroDivisionError, ValueError):
+    except ZeroDivisionError:
         return "Math Error"
-    except (IndexError, TypeError):
+    except (IndexError, TypeError, ValueError):
         return "Syntax Error"
 
     if result.is_integer():
@@ -49,6 +49,8 @@ def solve_parentheses(tokens):
             function = values[open_position - 1]
 
             if function == "sqrt":
+                if result < 0:
+                    raise ZeroDivisionError
                 result = math.sqrt(result)
             elif function == "sin":
                 result = math.sin(math.radians(result))
@@ -57,8 +59,12 @@ def solve_parentheses(tokens):
             elif function == "tan":
                 result = math.tan(math.radians(result))
             elif function == "log":
+                if result <= 0:
+                    raise ZeroDivisionError
                 result = math.log10(result)
             else:
+                if result <= 0:
+                    raise ZeroDivisionError
                 result = math.log(result)
 
             values[open_position - 1:close_position + 1] = [result]
