@@ -34,6 +34,15 @@ class CalculatorTest(unittest.TestCase):
     def test_division_entre_cero(self):
         self.assertEqual(calculate("8 / 0"), "Math Error")
 
+    def test_multiplicacion_antes_de_suma(self):
+        self.assertEqual(calculate("2 + 3 * 4"), 14)
+
+    def test_division_antes_de_resta(self):
+        self.assertEqual(calculate("10 - 6 / 2"), 7)
+
+    def test_operaciones_mismo_nivel_de_izquierda_a_derecha(self):
+        self.assertEqual(calculate("20 / 5 * 2"), 8)
+
 
 if __name__ == "__main__":
     unittest.main()

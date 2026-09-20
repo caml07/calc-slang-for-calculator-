@@ -1,32 +1,72 @@
 def calculate(expression):
-    expression = expression.strip()
+    expression = expression.replace(" ", "")
+    tokens = tokenize_expression(expression)
 
-    if "+" in expression:
-        numbers = expression.split("+")
-        left_number = float(numbers[0].strip())
-        right_number = float(numbers[1].strip())
-        result = left_number + right_number
-    elif "*" in expression:
-        numbers = expression.split("*")
-        left_number = float(numbers[0].strip())
-        right_number = float(numbers[1].strip())
-        result = left_number * right_number
-    elif "/" in expression:
-        numbers = expression.split("/")
-        left_number = float(numbers[0].strip())
-        right_number = float(numbers[1].strip())
-
-        if right_number == 0:
-            return "Math Error"
-
-        result = left_number / right_number
-    else:
-        minus_position = expression.find("-", 1)
-        left_number = float(expression[:minus_position].strip())
-        right_number = float(expression[minus_position + 1:].strip())
-        result = left_number - right_number
+    try:
+        result = solve_basic_expression(tokens)
+    except ZeroDivisionError:
+        return "Math Error"
 
     if result.is_integer():
         return int(result)
+
+    return result
+
+
+def tokenize_expression(expression):
+    tokens = []
+    number = ""
+
+    for position, char in enumerate(expression):
+        if char.isdigit() or char == ".":
+            number += char
+        elif char == "-" and (position == 0 or expression[position - 1] in "+-*/"):
+            number += char
+        else:
+            if number:
+                tokens.append(float(number))
+                number = ""
+            tokens.append(char)
+
+    if number:
+        tokens.append(float(number))
+
+    return tokens
+
+
+def solve_basic_expression(tokens):
+    values = tokens.copy()
+
+    index = 1
+    while index < len(values):
+        operator = values[index]
+
+        if operator in ("*", "/"):
+            left_number = values[index - 1]
+            right_number = values[index + 1]
+
+            if operator == "*":
+                result = left_number * right_number
+            else:
+                result = left_number / right_number
+
+            values[index - 1:index + 2] = [result]
+            index = 1
+        else:
+            index += 2
+
+    result = values[0]
+    index = 1
+
+    while index < len(values):
+        operator = values[index]
+        number = values[index + 1]
+
+        if operator == "+":
+            result += number
+        else:
+            result -= number
+
+        index += 2
 
     return result
