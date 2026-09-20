@@ -113,6 +113,18 @@ class CalculatorTest(unittest.TestCase):
     def test_logaritmo_natural_negativo(self):
         self.assertEqual(calculate("ln(-2)"), "Math Error")
 
+    def test_decimal_sin_cero_inicial(self):
+        self.assertEqual(calculate(".5 + .25"), 0.75)
+
+    def test_expresion_incompleta(self):
+        self.assertEqual(calculate("2 +"), "Syntax Error")
+
+    def test_parentesis_sin_cerrar(self):
+        self.assertEqual(calculate("(2 + 3"), "Syntax Error")
+
+    def test_funcion_sin_argumento(self):
+        self.assertEqual(calculate("sin()"), "Syntax Error")
+
 
 if __name__ == "__main__":
     unittest.main()

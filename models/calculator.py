@@ -3,12 +3,17 @@ import math
 
 def calculate(expression):
     expression = expression.replace(" ", "")
-    tokens = tokenize_expression(expression)
 
     try:
+        if not expression or expression.count("(") != expression.count(")"):
+            return "Syntax Error"
+
+        tokens = tokenize_expression(expression)
         result = solve_parentheses(tokens)
     except (ZeroDivisionError, ValueError):
         return "Math Error"
+    except (IndexError, TypeError):
+        return "Syntax Error"
 
     if result.is_integer():
         return int(result)
