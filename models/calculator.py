@@ -51,6 +51,11 @@ def tokenize_expression(expression):
 def solve_basic_expression(tokens):
     values = tokens.copy()
 
+    while "%" in values:
+        percent_position = values.index("%")
+        number = values[percent_position - 1]
+        values[percent_position - 1:percent_position + 1] = [number / 100]
+
     while "^" in values:
         operator_position = len(values) - 1 - values[::-1].index("^")
         left_number = values[operator_position - 1]

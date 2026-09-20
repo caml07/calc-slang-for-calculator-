@@ -61,6 +61,15 @@ class CalculatorTest(unittest.TestCase):
     def test_potencias_se_resuelven_de_derecha_a_izquierda(self):
         self.assertEqual(calculate("2 ^ 3 ^ 2"), 512)
 
+    def test_porcentaje_simple(self):
+        self.assertEqual(calculate("50%"), 0.5)
+
+    def test_porcentaje_dentro_de_multiplicacion(self):
+        self.assertEqual(calculate("200 * 10%"), 20)
+
+    def test_porcentaje_en_una_expresion(self):
+        self.assertEqual(calculate("1 + 50%"), 1.5)
+
 
 if __name__ == "__main__":
     unittest.main()
