@@ -1,3 +1,6 @@
+import math
+
+
 def calculate(expression):
     expression = expression.replace(" ", "")
     tokens = tokenize_expression(expression)
@@ -30,8 +33,19 @@ def solve_parentheses(tokens):
 def tokenize_expression(expression):
     tokens = []
     number = ""
+    position = 0
 
-    for position, char in enumerate(expression):
+    while position < len(expression):
+        char = expression[position]
+
+        if expression[position:position + 2] == "pi":
+            if number:
+                tokens.append(float(number))
+                number = ""
+            tokens.append(math.pi)
+            position += 2
+            continue
+
         if char.isdigit() or char == ".":
             number += char
         elif char == "-" and (position == 0 or expression[position - 1] in "+-*/"):
@@ -41,6 +55,8 @@ def tokenize_expression(expression):
                 tokens.append(float(number))
                 number = ""
             tokens.append(char)
+
+        position += 1
 
     if number:
         tokens.append(float(number))

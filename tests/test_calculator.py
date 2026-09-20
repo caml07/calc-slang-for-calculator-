@@ -1,3 +1,4 @@
+import math
 import unittest
 
 from models.calculator import calculate
@@ -69,6 +70,15 @@ class CalculatorTest(unittest.TestCase):
 
     def test_porcentaje_en_una_expresion(self):
         self.assertEqual(calculate("1 + 50%"), 1.5)
+
+    def test_constante_pi(self):
+        self.assertEqual(calculate("pi"), math.pi)
+
+    def test_pi_dentro_de_una_expresion(self):
+        self.assertEqual(calculate("2 * pi"), 2 * math.pi)
+
+    def test_pi_con_parentesis(self):
+        self.assertEqual(calculate("pi * (2 + 1)"), 3 * math.pi)
 
 
 if __name__ == "__main__":
