@@ -51,7 +51,7 @@ button {
     font-size: 20px;
     cursor:grab;
     box-shadow:6px 6px 12px #252b3a;
-    transition: background-color 0.2s, color 0.2s;
+    transition: background-color 0.2s, color 0.2s, transform 0.1s;
 }
 
 button:hover {
@@ -62,4 +62,14 @@ button:hover {
 button:active {
     transform: scale(0.95);
     box-shadow: inset 3px 3px 6px #1e2532;
+}
+
+button.operator:hover {
+    background-color: rgb(218, 84, 155);
+    color: #97065a;
+}
+
+button.equals:hover {
+    background-color: #f475d4;
+    color: #c10091;
 }
