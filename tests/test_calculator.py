@@ -125,6 +125,18 @@ class CalculatorTest(unittest.TestCase):
     def test_funcion_sin_argumento(self):
         self.assertEqual(calculate("sin()"), "Syntax Error")
 
+    def test_negativo_dentro_de_parentesis(self):
+        self.assertEqual(calculate("(-5 + 3) * 2"), -4)
+
+    def test_exponente_negativo(self):
+        self.assertEqual(calculate("2 ^ -2"), 0.25)
+
+    def test_parentesis_en_orden_invalido(self):
+        self.assertEqual(calculate(")2 + 3("), "Syntax Error")
+
+    def test_operador_invalido(self):
+        self.assertEqual(calculate("2 & 3"), "Syntax Error")
+
 
 if __name__ == "__main__":
     unittest.main()

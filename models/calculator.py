@@ -5,7 +5,7 @@ def calculate(expression):
     expression = expression.replace(" ", "")
 
     try:
-        if not expression or expression.count("(") != expression.count(")"):
+        if not expression or not has_valid_parentheses(expression):
             return "Syntax Error"
 
         tokens = tokenize_expression(expression)
@@ -19,6 +19,20 @@ def calculate(expression):
         return int(result)
 
     return result
+
+
+def has_valid_parentheses(expression):
+    open_parentheses = 0
+
+    for char in expression:
+        if char == "(":
+            open_parentheses += 1
+        elif char == ")":
+            open_parentheses -= 1
+            if open_parentheses < 0:
+                return False
+
+    return open_parentheses == 0
 
 
 def solve_parentheses(tokens):
@@ -97,9 +111,11 @@ def tokenize_expression(expression):
 
         if char.isdigit() or char == ".":
             number += char
-        elif char == "-" and (position == 0 or expression[position - 1] in "+-*/("):
+        elif char == "-" and (position == 0 or expression[position - 1] in "+-*/^("):
             number += char
         else:
+            if char not in "+-*/^%()":
+                raise TypeError
             if number:
                 tokens.append(float(number))
                 number = ""
