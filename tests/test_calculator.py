@@ -13,6 +13,15 @@ class CalculatorTest(unittest.TestCase):
     def test_suma_decimales(self):
         self.assertEqual(calculate("2.5 + 1.5"), 4)
 
+    def test_resta_dos_numeros(self):
+        self.assertEqual(calculate("8 - 3"), 5)
+
+    def test_numero_negativo_al_inicio(self):
+        self.assertEqual(calculate("-5 + 3"), -2)
+
+    def test_resta_con_numero_negativo(self):
+        self.assertEqual(calculate("5 - -2"), 7)
+
 
 if __name__ == "__main__":
     unittest.main()
