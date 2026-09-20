@@ -3,57 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Welcome to Jodunna's Calculator</title>
 </head>
 <body>
     <h1>Our Calculator</h1>
+
     <div class="calculator">
         <div class="screen">Your result will appear here :D</div>
-        <div class="keyboard 1">
+
+        <div class="keyboard row-1">
             <button>DEL</button>
             <button>AC</button>
             <button>%</button>
             <button>±</button>
         </div>
-        <div class="keyboard 2">
+
+        <div class="keyboard row-2">
             <button>xʸ</button>
             <button>^</button>
             <button>√</button>
             <button>π</button>
         </div>
-         <div class="keyboard 3">
+
+        <div class="keyboard row-3">
             <button>log</button>
             <button>ln</button>
             <button>(</button>
             <button>)</button>
         </div>
-           <div class="keyboard 4">
+
+        <div class="keyboard row-4">
             <button>sin</button>
             <button>cos</button>
             <button>tan</button>
             <button>÷</button>
         </div>
-        </div>
-        <div class="numbers 1">
+
+        <div class="numbers row-1">
             <button>7</button>
             <button>8</button>
             <button>9</button>
-            <button>x</button>
+            <button>×</button>
         </div>
-        <div class="numbers 2">
+
+        <div class="numbers row-2">
             <button>4</button>
             <button>5</button>
             <button>6</button>
-            <button>-</button>
+            <button>−</button>
         </div>
-        <div class="numbers 3">
+
+        <div class="numbers row-3">
             <button>1</button>
             <button>2</button>
             <button>3</button>
             <button>+</button>
         </div>
-        <div class="numbers 4">
+
+        <div class="numbers row-4">
             <button>0</button>
             <button>.</button>
             <button>=</button>
