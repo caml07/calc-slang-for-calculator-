@@ -17,6 +17,8 @@ body {
     padding: 24px;
     border-radius: 32px;
     box-sizing: border-box;
+    box-shadow:6px 6px 12px #273456;
+            
 }
 
 .screen {
@@ -30,4 +32,34 @@ body {
     border-radius: 16px;
     font-family: "Press Start 2p", monospace;
     box-sizing: border-box;
+}
+
+.keyboard, .numbers {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    font-family: "Press Start 2p", monospace;
+}
+
+button {
+    background-color: #293243;
+    color: #f5f5f5;
+    border:none;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    min-height: 56px;
+    font-size: 20px;
+    cursor:grab;
+    box-shadow:6px 6px 12px #252b3a;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+button:hover {
+    background-color: #85baf7;
+    color: #1e2532;
+}
+
+button:active {
+    transform: scale(0.95);
+    box-shadow: inset 3px 3px 6px #1e2532;
 }
