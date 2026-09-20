@@ -89,6 +89,18 @@ class CalculatorTest(unittest.TestCase):
     def test_raiz_cuadrada_negativa(self):
         self.assertEqual(calculate("sqrt(-4)"), "Math Error")
 
+    def test_seno_en_grados(self):
+        self.assertAlmostEqual(calculate("sin(30)"), 0.5)
+
+    def test_coseno_en_grados(self):
+        self.assertAlmostEqual(calculate("cos(60)"), 0.5)
+
+    def test_tangente_en_grados(self):
+        self.assertAlmostEqual(calculate("tan(45)"), 1)
+
+    def test_trigonometria_dentro_de_expresion(self):
+        self.assertAlmostEqual(calculate("2 * sin(30)"), 1)
+
 
 if __name__ == "__main__":
     unittest.main()

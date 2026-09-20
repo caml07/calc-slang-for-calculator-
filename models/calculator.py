@@ -26,8 +26,18 @@ def solve_parentheses(tokens):
         inside = values[open_position + 1:close_position]
         result = solve_basic_expression(inside)
 
-        if open_position > 0 and values[open_position - 1] == "sqrt":
-            result = math.sqrt(result)
+        if open_position > 0 and values[open_position - 1] in ("sqrt", "sin", "cos", "tan"):
+            function = values[open_position - 1]
+
+            if function == "sqrt":
+                result = math.sqrt(result)
+            elif function == "sin":
+                result = math.sin(math.radians(result))
+            elif function == "cos":
+                result = math.cos(math.radians(result))
+            else:
+                result = math.tan(math.radians(result))
+
             values[open_position - 1:close_position + 1] = [result]
         else:
             values[open_position:close_position + 1] = [result]
@@ -57,6 +67,15 @@ def tokenize_expression(expression):
                 number = ""
             tokens.append("sqrt")
             position += 4
+            continue
+
+        function = expression[position:position + 3]
+        if function in ("sin", "cos", "tan"):
+            if number:
+                tokens.append(float(number))
+                number = ""
+            tokens.append(function)
+            position += 3
             continue
 
         if char.isdigit() or char == ".":
