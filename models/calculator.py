@@ -3,7 +3,7 @@ def calculate(expression):
     tokens = tokenize_expression(expression)
 
     try:
-        result = solve_basic_expression(tokens)
+        result = solve_parentheses(tokens)
     except ZeroDivisionError:
         return "Math Error"
 
@@ -11,6 +11,20 @@ def calculate(expression):
         return int(result)
 
     return result
+
+
+def solve_parentheses(tokens):
+    values = tokens.copy()
+
+    while "(" in values:
+        open_position = len(values) - 1 - values[::-1].index("(")
+        close_position = values.index(")", open_position)
+
+        inside = values[open_position + 1:close_position]
+        result = solve_basic_expression(inside)
+        values[open_position:close_position + 1] = [result]
+
+    return solve_basic_expression(values)
 
 
 def tokenize_expression(expression):

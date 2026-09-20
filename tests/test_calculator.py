@@ -43,6 +43,15 @@ class CalculatorTest(unittest.TestCase):
     def test_operaciones_mismo_nivel_de_izquierda_a_derecha(self):
         self.assertEqual(calculate("20 / 5 * 2"), 8)
 
+    def test_parentesis_cambian_la_precedencia(self):
+        self.assertEqual(calculate("(2 + 3) * 4"), 20)
+
+    def test_parentesis_en_medio_de_expresion(self):
+        self.assertEqual(calculate("10 / (3 + 2)"), 2)
+
+    def test_parentesis_anidados(self):
+        self.assertEqual(calculate("2 * (3 + (4 - 1))"), 12)
+
 
 if __name__ == "__main__":
     unittest.main()
