@@ -6,6 +6,20 @@ def calculate(expression):
         left_number = float(numbers[0].strip())
         right_number = float(numbers[1].strip())
         result = left_number + right_number
+    elif "*" in expression:
+        numbers = expression.split("*")
+        left_number = float(numbers[0].strip())
+        right_number = float(numbers[1].strip())
+        result = left_number * right_number
+    elif "/" in expression:
+        numbers = expression.split("/")
+        left_number = float(numbers[0].strip())
+        right_number = float(numbers[1].strip())
+
+        if right_number == 0:
+            return "Math Error"
+
+        result = left_number / right_number
     else:
         minus_position = expression.find("-", 1)
         left_number = float(expression[:minus_position].strip())

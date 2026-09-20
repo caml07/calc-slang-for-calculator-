@@ -22,6 +22,18 @@ class CalculatorTest(unittest.TestCase):
     def test_resta_con_numero_negativo(self):
         self.assertEqual(calculate("5 - -2"), 7)
 
+    def test_multiplicacion_dos_numeros(self):
+        self.assertEqual(calculate("4 * 3"), 12)
+
+    def test_division_dos_numeros(self):
+        self.assertEqual(calculate("10 / 2"), 5)
+
+    def test_division_con_decimal(self):
+        self.assertEqual(calculate("5 / 2"), 2.5)
+
+    def test_division_entre_cero(self):
+        self.assertEqual(calculate("8 / 0"), "Math Error")
+
 
 if __name__ == "__main__":
     unittest.main()
