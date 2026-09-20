@@ -52,6 +52,15 @@ class CalculatorTest(unittest.TestCase):
     def test_parentesis_anidados(self):
         self.assertEqual(calculate("2 * (3 + (4 - 1))"), 12)
 
+    def test_potencia_dos_numeros(self):
+        self.assertEqual(calculate("2 ^ 3"), 8)
+
+    def test_potencia_antes_de_multiplicacion(self):
+        self.assertEqual(calculate("2 * 3 ^ 2"), 18)
+
+    def test_potencias_se_resuelven_de_derecha_a_izquierda(self):
+        self.assertEqual(calculate("2 ^ 3 ^ 2"), 512)
+
 
 if __name__ == "__main__":
     unittest.main()

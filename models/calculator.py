@@ -51,6 +51,13 @@ def tokenize_expression(expression):
 def solve_basic_expression(tokens):
     values = tokens.copy()
 
+    while "^" in values:
+        operator_position = len(values) - 1 - values[::-1].index("^")
+        left_number = values[operator_position - 1]
+        right_number = values[operator_position + 1]
+        result = left_number ** right_number
+        values[operator_position - 1:operator_position + 2] = [result]
+
     index = 1
     while index < len(values):
         operator = values[index]
