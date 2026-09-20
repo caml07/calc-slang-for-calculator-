@@ -10,6 +10,12 @@ body {
     align-items: center;
 }
 
+h1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .calculator {
     background-color: #293243;
     width: 90%;
