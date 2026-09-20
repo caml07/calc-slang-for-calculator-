@@ -1,3 +1,33 @@
 body {
-    background-color: rgb(215, 245, 255);
+    background-color: #626e80;
+    color: #f5f5f5;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.calculator {
+    background-color: #293243;
+    width: 90%;
+    max-width: 380px;
+    padding: 24px;
+    border-radius: 32px;
+    box-sizing: border-box;
+}
+
+.screen {
+    color: #f5f5f5;
+    font-size: 24px;
+    background-color: #0e1d38;
+    text-align: right;
+    padding: 20px;
+    margin-bottom: 20px;
+    overflow-wrap: anywhere;
+    border-radius: 16px;
+    font-family: "Press Start 2p", monospace;
+    box-sizing: border-box;
 }
