@@ -13,8 +13,12 @@ buttons.forEach((button) => {
             }
         }
 
-        if(value === "DEL") {
-            screen.textContent = screen.textContent.slice(0,1);
+      if (value === "DEL") {
+        if (screen.textContent.length == 1) {
+          screen.textContent = 0
+        } else {
+          screen.textContent = screen.textContent.slice(1, screen.textContent.length);
+        }
         }
 
         if (value === "AC") {
