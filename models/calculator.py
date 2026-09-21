@@ -10,10 +10,13 @@ def calculate(expression):
 
         tokens = tokenize_expression(expression)
         result = solve_parentheses(tokens)
-    except ZeroDivisionError:
+    except (ZeroDivisionError, OverflowError):
         return "Math Error"
     except (IndexError, TypeError, ValueError):
         return "Syntax Error"
+
+    if not math.isfinite(result):
+        return "Math Error"
 
     if result.is_integer():
         return int(result)

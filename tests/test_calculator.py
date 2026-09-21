@@ -113,6 +113,12 @@ class CalculatorTest(unittest.TestCase):
     def test_logaritmo_natural_negativo(self):
         self.assertEqual(calculate("ln(-2)"), "Math Error")
 
+    def test_potencia_con_overflow(self):
+        self.assertEqual(calculate("1000 ^ 1000"), "Math Error")
+
+    def test_resultado_no_finito(self):
+        self.assertEqual(calculate("1" + "0" * 400), "Math Error")
+
     def test_decimal_sin_cero_inicial(self):
         self.assertEqual(calculate(".5 + .25"), 0.75)
 
