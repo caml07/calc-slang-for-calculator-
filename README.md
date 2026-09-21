@@ -2,6 +2,10 @@
 Una calculadora hecha con flask
 Hola hare mi primer commit 
 
+## MVC Architecture
+
+The project follows the Model-View-Controller pattern. The Model contains the calculation logic, the View provides the calculator interface, and the Controller connects browser requests with both parts without placing calculation rules in the interface.
+
 ## How to install and run
 
 First clone the repository and enter the project folder.
@@ -57,7 +61,9 @@ The interface was designed with usability, simplicity, and clarity in mind. The 
 
 ## Controller
 
-The Controller is in `app.py`. It creates the Flask application and handles the root route:
+The Controller is implemented in `app.py`. It creates the Flask application, defines the HTTP routes, receives requests from the View, calls the Model when a calculation is needed, and formats the response returned to the browser.
+
+The `calculator` controller handles the initial page request. It responds to `GET /` by rendering the View from `templates/index.html`:
 
 ```python
 @app.route("/")
@@ -65,15 +71,16 @@ def calculator():
     return render_template("index.html")
 ```
 
-When a browser requests `/`, the `calculator` controller renders `templates/index.html`. Flask also serves the view's CSS, JavaScript, and images from `static/` through their `url_for` links. The `calculate_route` controller receives expressions at `POST /calculate`, sends them to `models/calculator.py`, and returns the result as JSON.
+Flask serves the View's CSS, JavaScript, and images from `static/` through their `url_for` links. After the page loads, the View sends an expression to `POST /calculate`. The `calculate_route` controller reads the JSON request, passes the expression to `calculate(expression)` in `models/calculator.py`, and returns the result as a JSON response. This keeps the Controller responsible for communication while the Model remains responsible for mathematical rules.
 
 ```mermaid
-flowchart LR
-    Browser -->|GET /| Controller[app.py: calculator]
-    Controller -->|render_template| View[templates/index.html]
-    View -->|url_for| Static[static CSS, JavaScript, images]
-    Static -->|POST /calculate| Calculate[app.py: calculate_route]
-    Calculate -->|"calculate expression"| Model[models/calculator.py]
-    Model -->|JSON result| Calculate
-    Calculate --> Static
+flowchart TD
+    Browser[Browser] -->|GET /| Controller[Controller: app.py]
+    Controller -->|render_template| View[View: templates/index.html]
+    View -->|uses| Assets[static CSS and JavaScript]
+    Assets -->|POST /calculate| Controller
+    Controller -->|calculate expression| Model[Model: models/calculator.py]
+    Model -->|calculation result| Controller
+    Controller -->|JSON response| Assets
+    Assets -->|display result| Browser
 ```
