@@ -73,7 +73,7 @@ flowchart LR
     Controller -->|render_template| View[templates/index.html]
     View -->|url_for| Static[static CSS, JavaScript, images]
     Static -->|POST /calculate| Calculate[app.py: calculate_route]
-    Calculate -->|calculate(expression)| Model[models/calculator.py]
+    Calculate -->|"calculate expression"| Model[models/calculator.py]
     Model -->|JSON result| Calculate
     Calculate --> Static
 ```
